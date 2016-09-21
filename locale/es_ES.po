@@ -1,0 +1,11 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:analytic_account.account,left:"
+msgid "Left"
+msgstr "Izquierda"
+
+msgctxt "field:analytic_account.account,right:"
+msgid "Right"
+msgstr "Derecha"
