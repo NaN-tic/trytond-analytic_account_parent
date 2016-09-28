@@ -50,7 +50,7 @@ class Account:
         childs = cls.search([('parent', 'child_of', ids)])
         all_ids = {}.fromkeys(ids + [c.id for c in childs]).keys()
 
-        cursor = Transaction().cursor
+        cursor = Transaction().connection.cursor()
 
         for sub_ids in grouped_slice(all_ids):
             red_sql = reduce_ids(table_a.id, sub_ids)
