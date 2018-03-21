@@ -45,8 +45,9 @@ class Account:
         table_c = cls.__table__()
         line = Line.__table__()
 
+        line_query = Line.query_get(line)
+
         ids = [a.id for a in accounts]
-        account_view_ids = [a.id for a in accounts if a.type == 'view']
         childs = cls.search([('parent', 'child_of', ids)])
         all_ids = {}.fromkeys(ids + [c.id for c in childs]).keys()
 
@@ -62,12 +63,10 @@ class Account:
                     table_a.id,
                     Sum(Coalesce(line.credit, 0)),
                     Sum(Coalesce(line.debit, 0)),
-                    where=red_sql & (table_c.active == True),
+                    where=red_sql & table_c.active & line_query,
                     group_by=table_a.id))
 
         for row in cursor.fetchall():
-            if not row[0] in account_view_ids:
-                continue
             if 'credit' in names:
                 result['credit'][row[0]] = row[1]
             if 'debit' in names:
