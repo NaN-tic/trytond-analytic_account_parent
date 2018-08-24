@@ -11,8 +11,7 @@ from sql.conditionals import Coalesce
 __all__ = ['Account']
 
 
-class Account:
-    __metaclass__ = PoolMeta
+class Account(metaclass=PoolMeta):
     __name__ = 'analytic_account.account'
     left = fields.Integer('Left', required=True, select=True)
     right = fields.Integer('Right', required=True, select=True)
@@ -49,7 +48,7 @@ class Account:
 
         ids = [a.id for a in accounts]
         childs = cls.search([('parent', 'child_of', ids)])
-        all_ids = {}.fromkeys(ids + [c.id for c in childs]).keys()
+        all_ids = list({}.fromkeys(ids + [c.id for c in childs]).keys())
 
         cursor = Transaction().connection.cursor()
 
