@@ -92,16 +92,16 @@ class AnalyticAccountParentTestCase(ModuleTestCase):
                     ('code', '=', 'EXP'),
                     ])
             revenue, = self.account.search([
-                    ('kind', '=', 'revenue'),
+                    ('type.revenue', '=', True),
                     ])
             receivable, = self.account.search([
-                    ('kind', '=', 'receivable'),
+                    ('type.receivable', '=', True),
                     ])
             expense, = self.account.search([
-                    ('kind', '=', 'expense'),
+                    ('type.expense', '=', True),
                     ])
             payable, = self.account.search([
-                    ('kind', '=', 'payable'),
+                    ('type.payable', '=', True),
                     ])
 
             # analytic lines
