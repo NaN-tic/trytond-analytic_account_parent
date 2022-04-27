@@ -1,17 +1,16 @@
-# This file is part analytic_account_parent module for Tryton.
-# The COPYRIGHT file at the top level of this repository contains
-# the full copyright notices and license terms.
-import unittest
-import doctest
+
+# This file is part of Tryton.  The COPYRIGHT file at the top level of
+# this repository contains the full copyright notices and license terms.
+
 from decimal import Decimal
-import trytond.tests.test_tryton
 from trytond.tests.test_tryton import ModuleTestCase
 from trytond.tests.test_tryton import POOL, DB_NAME, USER, CONTEXT
 from trytond.transaction import Transaction
+from trytond.modules.company.tests import CompanyTestMixin
 
 
-class AnalyticAccountParentTestCase(ModuleTestCase):
-    'Test Analytic Account Parent module'
+class AnalyticAccountParentTestCase(CompanyTestMixin, ModuleTestCase):
+    'Test AnalyticAccountParent module'
     module = 'analytic_account_parent'
 
     def setUp(self):
@@ -220,12 +219,5 @@ class AnalyticAccountParentTestCase(ModuleTestCase):
                 self.assertEqual(analytic_account.credit, Decimal(90))
                 self.assertEqual(analytic_account.debit, Decimal(0))
 
-def suite():
-    suite = trytond.tests.test_tryton.suite()
-    from trytond.modules.account.tests import test_account
-    for test in test_account.suite():
-        if test not in suite and not isinstance(test, doctest.DocTestCase):
-            suite.addTest(test)
-    suite.addTests(unittest.TestLoader().loadTestsFromTestCase(
-            AnalyticAccountParentTestCase))
-    return suite
+
+del ModuleTestCase
