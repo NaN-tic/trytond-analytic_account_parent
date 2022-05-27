@@ -204,7 +204,7 @@ class AnalyticAccountParentTestCase(CompanyTestMixin, ModuleTestCase):
                 ]
             Move.create(vlist)
 
-            with Transaction().set_context(start_date=period.end_date):
+            with Transaction().set_context(start_date=period.start_date):
                 analytic_account = AnalyticAccount(analytic_account1.id)
                 self.assertEqual(analytic_account.debit, Decimal(30))
                 self.assertEqual(analytic_account.credit, Decimal(140))
