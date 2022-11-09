@@ -13,8 +13,8 @@ __all__ = ['Account']
 
 class Account(metaclass=PoolMeta):
     __name__ = 'analytic_account.account'
-    left = fields.Integer('Left', required=True, select=True)
-    right = fields.Integer('Right', required=True, select=True)
+    left = fields.Integer('Left', required=True)
+    right = fields.Integer('Right', required=True)
 
     @classmethod
     def __setup__(cls):
