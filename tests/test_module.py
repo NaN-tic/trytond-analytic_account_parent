@@ -98,16 +98,20 @@ class AnalyticAccountParentTestCase(CompanyTestMixin, ModuleTestCase):
                     ])
             revenue, = Account.search([
                     ('type.revenue', '=', True),
-                    ])
+                    ('closed', '=', False),
+                    ], limit=1)
             receivable, = Account.search([
                     ('type.receivable', '=', True),
-                    ])
+                    ('closed', '=', False),
+                    ], limit=1)
             expense, = Account.search([
                     ('type.expense', '=', True),
-                    ])
+                    ('closed', '=', False),
+                    ], limit=1)
             payable, = Account.search([
                     ('type.payable', '=', True),
-                    ])
+                    ('closed', '=', False),
+                    ], limit=1)
 
             # analytic lines
             account_line1b = {
