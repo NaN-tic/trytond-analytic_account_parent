@@ -64,10 +64,9 @@ class Account(metaclass=PoolMeta):
                     Sum(Coalesce(line.debit, 0)),
                     where=red_sql & table_c.active & line_query,
                     group_by=table_a.id))
-
-        for row in cursor.fetchall():
-            if 'credit' in names:
-                result['credit'][row[0]] = row[1]
-            if 'debit' in names:
-                result['debit'][row[0]] = row[2]
+            for row in cursor.fetchall():
+                if 'credit' in names:
+                    result['credit'][row[0]] = row[1]
+                if 'debit' in names:
+                    result['debit'][row[0]] = row[2]
         return result
